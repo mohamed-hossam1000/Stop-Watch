@@ -260,11 +260,11 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
  .text.initINT2
                 0x00000c58       0x46 ./project2.o
                 0x00000c58                initINT2
- .text.main     0x00000c9e      0x174 ./project2.o
+ .text.main     0x00000c9e      0x1ee ./project2.o
                 0x00000c9e                main
  .text.__vector_7
-                0x00000e12       0xa8 ./project2.o
-                0x00000e12                __vector_7
+                0x00000e8c       0x2e ./project2.o
+                0x00000e8c                __vector_7
  .text.__vector_1
                 0x00000eba       0x52 ./project2.o
                 0x00000eba                __vector_1

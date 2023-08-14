@@ -50,6 +50,7 @@ void initINT2()
 
 int main()
 {
+	unsigned char i;
 	SREG|=(1<<7);//setting global interrupt bit
 	initTimer1();
 	init7SEG();
@@ -58,7 +59,38 @@ int main()
 	initINT2();
 	for(;;)
 	{
-		unsigned char i;
+		/* keep time in format */
+		if(time[0]==10)
+		{
+			time[0]=0;
+			time[1]++;
+			if(time[1]==6)
+			{
+				time[1]=0;
+				time[2]++;
+				if(time[2]==10)
+				{
+					time[2]=0;
+					time[3]++;
+					if(time[3]==6)
+					{
+						time[3]=0;
+						time[4]++;
+						if(time[4]==10)
+						{
+							time[4]=0;
+							time[5]++;
+							if(time[5]==10)
+							{
+								time[5]=0;
+							}
+						}
+					}
+				}
+			}
+		}
+
+		/* display time on the seven segments using round robin display */
 		for(i=0; i<6; i++)
 		{
 			PORTA=(PORTA&0xC0) | (1<<i);
@@ -72,35 +104,6 @@ ISR(TIMER1_COMPA_vect)
 {
 	//updating the clock every second
 	time[0]++;
-	if(time[0]==10)
-	{
-		time[0]=0;
-		time[1]++;
-		if(time[1]==6)
-		{
-			time[1]=0;
-			time[2]++;
-			if(time[2]==10)
-			{
-				time[2]=0;
-				time[3]++;
-				if(time[3]==6)
-				{
-					time[3]=0;
-					time[4]++;
-					if(time[4]==10)
-					{
-						time[4]=0;
-						time[5]++;
-						if(time[5]==10)
-						{
-							time[5]=0;
-						}
-					}
-				}
-			}
-		}
-	}
 }
 
 ISR(INT0_vect)
